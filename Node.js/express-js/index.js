@@ -1,13 +1,16 @@
 const express = require('express');
 const path = require('path');
-const members = require('./Members');
+
+const logger = require('./middleware/logger');
 
 const app = express();
 
-// Gets all members
-app.get('/api/members', (req, res) => {
-  res.json(members);
-});
+// Body Parser MiddleWare
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// Iniit middleware
+// app.use(logger);
 
 // app.get('/', (req, res) => {
 // //   res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -15,6 +18,9 @@ app.get('/api/members', (req, res) => {
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Members API Routes
+app.use('/api/members', require('./routes/api/member'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server stated on port ${PORT}`));
