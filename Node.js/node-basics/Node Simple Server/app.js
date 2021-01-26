@@ -1,8 +1,21 @@
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 
 // express app
 const app = express();
+
+// connect to mongodb
+const dbURI =
+  'mongodb+srv://scott:scott123@node.w5sri.mongodb.net/node?retryWrites=true&w=majority';
+
+mongoose
+  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((res) => {
+    app.listen(3000);
+    console.log('connected to db');
+  })
+  .catch((err) => console.log(err));
 
 // register view engine
 app.set('view engine', 'ejs');
@@ -11,7 +24,6 @@ app.set('view engine', 'ejs');
 // app.set('views', 'myviews');
 
 // listen for requests
-app.listen(3000);
 
 //middleware & static files
 app.use(express.static('public'));
