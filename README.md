@@ -1,2 +1,2 @@
 # learning-projects
-This repository contains various tutorials and projects that I have used to learn new development tools.
+This repository contains various lessons and projects that I used to learn new development tools.
